@@ -19,12 +19,12 @@ public class PlayerController : MonoBehaviour
     public int cherryCount;
     public Text cherryNumber;
 
+    private bool isHurt;
     //public bool isGround, isJump;
     //bool jumpPressed;
 
 
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,10 +32,13 @@ public class PlayerController : MonoBehaviour
         crouchcoll = GetComponent<BoxCollider2D>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        Movement();
+
+        if (!isHurt)
+        {
+            Movement();
+        }
         SwitchAnim();
 
 
@@ -119,12 +122,30 @@ public class PlayerController : MonoBehaviour
     void SwitchAnim()//动画改变
     {
         anim.SetBool("idle", false);
+
+        if (rb.velocity.y<0.1f  && !coll.IsTouchingLayers(ground))
+        {
+            anim.SetBool("falling", true);
+        }
+
         if (anim.GetBool("jumping"))
         {
             if (rb.velocity.y < 0)
             {
                 anim.SetBool("jumping", false);
                 anim.SetBool("falling", true);
+            }
+        }
+        else if (isHurt)
+        {
+            anim.SetBool("hurt", true);
+            anim.SetFloat("running", 0f);
+            if (Mathf.Abs(rb .velocity.x)<0.1f)
+            {
+                anim.SetBool("hurt", false);
+                anim.SetBool("idle", false);
+
+                isHurt = false;
             }
         }
         else if (coll.IsTouchingLayers(ground))
@@ -135,18 +156,45 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collider2D)//物品收集
+    private void OnTriggerEnter2D(Collider2D collision)//物品收集
     {
-        if (collider2D.tag == "Collection")
+        if (collision.tag == "Collection")
         {
-            Destroy(collider2D.gameObject);
+            Destroy(collision.gameObject);
             cherryCount++;
             cherryNumber.text = cherryCount.ToString();
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)//消灭敌人
+    {
+        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+        if (collision.gameObject.tag == "Enemy")
+        {
+            if (anim.GetBool("falling"))
+            {
+                enemy.JumpOn();
+                //执行一次跳跃
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.deltaTime);
+                anim.SetBool("jumping", true);
+            }
+            //左侧碰撞
+            else if (transform.position.x< collision.gameObject.transform.position.x)
+            {
+                rb.velocity = new Vector2(-10f, rb.velocity.y);
+                isHurt = true;
+            }
+            //右侧碰撞
+            else if (transform.position.x > collision.gameObject.transform.position.x)
+            {
+                rb.velocity = new Vector2(10f, rb.velocity.y);
+                isHurt = true;
+
+            }
+        }
 
 
+    }
 
 
 }
