@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     public Collider2D crouchcoll;
-    [SerializeField] private Rigidbody2D rb;
+    private Rigidbody2D rb;
     private Animator anim;
     public Collider2D coll;
     public float speed;
