@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float jumpForce;
     public LayerMask ground;
-
+    public AudioSource jumpAudio, hurtAudio,cherryAudio;
     public int maxJumpCount = 2;
     private int jumpCount;
 
@@ -77,13 +77,13 @@ public class PlayerController : MonoBehaviour
 
     void Movement()//角色移动
     {
-        float horizontalmove = Input.GetAxis("Horizontal");
+        float horizontalMove = Input.GetAxis("Horizontal");
         float facedirection = Input.GetAxisRaw("Horizontal");
 
         //角色水平移动
-        if (horizontalmove != 0)
+        if (horizontalMove != 0)
         {
-            rb.velocity = new Vector2(horizontalmove * speed * Time.deltaTime, rb.velocity.y);
+            rb.velocity = new Vector2(horizontalMove * speed * Time.deltaTime, rb.velocity.y);
             anim.SetFloat("running", Mathf.Abs(facedirection));
 
         }
@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && jumpCount > 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.deltaTime);
+            jumpAudio.Play();
             anim.SetBool("jumping", true);
             jumpCount--;
 
@@ -160,6 +161,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.tag == "Collection")
         {
+            cherryAudio.Play();
             Destroy(collision.gameObject);
             cherryCount++;
             cherryNumber.text = cherryCount.ToString();
@@ -178,16 +180,20 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.deltaTime);
                 anim.SetBool("jumping", true);
             }
+            //受伤
             //左侧碰撞
             else if (transform.position.x< collision.gameObject.transform.position.x)
             {
                 rb.velocity = new Vector2(-10f, rb.velocity.y);
+                hurtAudio.Play();
                 isHurt = true;
             }
             //右侧碰撞
             else if (transform.position.x > collision.gameObject.transform.position.x)
             {
+                
                 rb.velocity = new Vector2(10f, rb.velocity.y);
+                hurtAudio.Play();
                 isHurt = true;
 
             }
