@@ -9278,7 +9278,6 @@ GameObject:
   - component: {fileID: 1761717864}
   - component: {fileID: 1761717866}
   - component: {fileID: 1761717865}
-  - component: {fileID: 1761717867}
   m_Layer: 5
   m_Name: PressE
   m_TagString: Untagged
@@ -9345,19 +9344,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761717863}
   m_CullTransparentMesh: 0
---- !u!114 &1761717867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1761717863}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1443649ed8af1f9418c4dc0fa579c917, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1850997391}
 --- !u!1 &1792952927
 GameObject:
   m_ObjectHideFlags: 0
@@ -9390,12 +9376,6 @@ Transform:
   m_Father: {fileID: 1655120374}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1850997391 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7136600329802993987, guid: a2f3dd811a53f9240baba7e19eb0ad4a,
-    type: 3}
-  m_PrefabInstance: {fileID: 7136600330593776425}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1871743454
 GameObject:
   m_ObjectHideFlags: 0
