@@ -2,23 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public Collider2D crouchcoll;
     private Rigidbody2D rb;
     private Animator anim;
     public Collider2D coll;
+    public Collider2D disColl;
     public float speed;
     public float jumpForce;
     public LayerMask ground;
     public AudioSource jumpAudio, hurtAudio,cherryAudio;
     public int maxJumpCount = 2;
     private int jumpCount;
-
+    public Transform cellingCheck;
     public int cherryCount;
     public Text cherryNumber;
-
+    public AudioSource deadAudio;
+    public bool congratulation = false;
     private bool isHurt;
     //public bool isGround, isJump;
     //bool jumpPressed;
@@ -29,7 +31,6 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        crouchcoll = GetComponent<BoxCollider2D>();
     }
 
     void FixedUpdate()
@@ -83,7 +84,7 @@ public class PlayerController : MonoBehaviour
         //角色水平移动
         if (horizontalMove != 0)
         {
-            rb.velocity = new Vector2(horizontalMove * speed * Time.deltaTime, rb.velocity.y);
+            rb.velocity = new Vector2(horizontalMove * speed * Time.fixedDeltaTime, rb.velocity.y);
             anim.SetFloat("running", Mathf.Abs(facedirection));
 
         }
@@ -96,27 +97,15 @@ public class PlayerController : MonoBehaviour
         //角色跳跃
         if (Input.GetButtonDown("Jump") && jumpCount > 0)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.deltaTime);
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.fixedDeltaTime);
             jumpAudio.Play();
             anim.SetBool("jumping", true);
             jumpCount--;
 
         }
 
-
-
-
         //角色下蹲
-        if (Input.GetKey(KeyCode.S) && coll.IsTouchingLayers(ground))
-        {
-            anim.SetBool("crouching", true);
-            crouchcoll.enabled = false;
-        }
-        else
-        {
-            anim.SetBool("crouching", false);
-            crouchcoll.enabled = true;
-        }
+        Crouch();
 
     }
 
@@ -157,13 +146,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)//物品收集
+    private void OnTriggerEnter2D(Collider2D collision)//碰撞触发器
     {
+        //游戏重置
+        if (collision.tag=="DeadLine")
+        {
+            deadAudio.Play();
+            GetComponent<AudioSource>().enabled = false;
+            Invoke("Restart", 2f);
+        }
+
+
+
+        //物品收集
         if (collision.tag == "Collection")
         {
             cherryAudio.Play();
             Destroy(collision.gameObject);
             cherryCount++;
+            if (cherryCount==21)
+            {
+                congratulation = true;
+            }
             cherryNumber.text = cherryCount.ToString();
         }
     }
@@ -177,7 +181,7 @@ public class PlayerController : MonoBehaviour
             {
                 enemy.JumpOn();
                 //执行一次跳跃
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.deltaTime);
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.fixedDeltaTime);
                 anim.SetBool("jumping", true);
             }
             //受伤
@@ -203,5 +207,29 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    void Crouch()//角色下蹲
+    {
+        if (!Physics2D.OverlapCircle(cellingCheck.position,0.2f,ground))
+        {
+            if (Input.GetButton("Crouch"))
+            {
+                anim.SetBool("crouching", true);
+                disColl.enabled = false;
+            }
+            else
+            {
+                anim.SetBool("crouching", false);
+                disColl.enabled = true;
+            }
+        }
+
+    }
+
+
+    void Restart()//重置游戏
+    {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+    }
 }
 
