@@ -17,15 +17,15 @@ public class Enemy : MonoBehaviour
 
     public void Death()//销毁对象
     {
-        deathAudio.Play();
+        GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject);
-
     }
 
     public void JumpOn()//触发死亡动画
     {
         deathAudio.Play();//播放死亡声音
         anim.SetTrigger("death");
+
     }
 
 }

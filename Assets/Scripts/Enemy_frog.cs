@@ -7,9 +7,7 @@ public class Enemy_frog : Enemy
     public Transform leftPoint, rightPoint;
     public float speed,jumpForce;
     public LayerMask ground;
-
     private Rigidbody2D rb;
-    //private Animator anim;
     private Collider2D coll;
     private float leftX, rightX;
     private bool faceLeft = true;
@@ -20,9 +18,7 @@ public class Enemy_frog : Enemy
     {
         base.Start();
         rb = GetComponent<Rigidbody2D>();
-        //anim = GetComponent<Animator>();
         coll = GetComponent<Collider2D>();
-
         leftX = leftPoint.position.x;
         rightX = rightPoint.position.x;
         transform.DetachChildren();
