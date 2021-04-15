@@ -55,6 +55,11 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        Jump();
+        Crouch();
+    }
 
     //void GroundMovement()
     //{
@@ -94,25 +99,12 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(facedirection, 1, 1);
         }
 
-        //角色跳跃
-        if (Input.GetButtonDown("Jump") && jumpCount > 0)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.fixedDeltaTime);
-            jumpAudio.Play();
-            anim.SetBool("jumping", true);
-            jumpCount--;
 
-        }
-
-        //角色下蹲
-        Crouch();
 
     }
 
     void SwitchAnim()//动画改变
     {
-        anim.SetBool("idle", false);
-
         if (rb.velocity.y<0.1f  && !coll.IsTouchingLayers(ground))
         {
             anim.SetBool("falling", true);
@@ -133,7 +125,6 @@ public class PlayerController : MonoBehaviour
             if (Mathf.Abs(rb .velocity.x)<0.1f)
             {
                 anim.SetBool("hurt", false);
-                anim.SetBool("idle", false);
 
                 isHurt = false;
             }
@@ -142,7 +133,6 @@ public class PlayerController : MonoBehaviour
         {
             jumpCount = maxJumpCount;   //重置跳跃数
             anim.SetBool("falling", false);
-            anim.SetBool("idle", true);
         }
     }
 
@@ -151,7 +141,12 @@ public class PlayerController : MonoBehaviour
         //游戏重置
         if (collision.tag=="DeadLine")
         {
+            coll.enabled = false;
+            disColl.enabled = false;
+            anim.SetTrigger("death");
             deadAudio.Play();
+            coll.enabled = false;
+            disColl.enabled = false;
             GetComponent<AudioSource>().enabled = false;
             Invoke("Restart", 2f);
         }
@@ -177,7 +172,7 @@ public class PlayerController : MonoBehaviour
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         if (collision.gameObject.tag == "Enemy")
         {
-            if (anim.GetBool("falling"))
+            if (anim.GetBool("falling") && collision.transform.position.y< transform.position.y)
             {
                 enemy.JumpOn();
                 //执行一次跳跃
@@ -230,6 +225,20 @@ public class PlayerController : MonoBehaviour
     {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
+    }
+
+
+    void Jump()
+    {
+        //角色跳跃
+        if (Input.GetButtonDown("Jump") && jumpCount > 0)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.fixedDeltaTime);
+            jumpAudio.Play();
+            anim.SetBool("jumping", true);
+            jumpCount--;
+
+        }
     }
 }
 

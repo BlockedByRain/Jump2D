@@ -24,14 +24,13 @@ public class Enemy_opossum : Enemy
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         Movement();
     }
 
 
-    void Movement()
+    void Movement()//移动
     {
         if (faceLeft)
         {

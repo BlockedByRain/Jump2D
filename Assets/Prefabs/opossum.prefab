@@ -72,9 +72,9 @@ GameObject:
   - component: {fileID: 493985375628066759}
   - component: {fileID: 493985375628066753}
   - component: {fileID: 493985375628066758}
-  - component: {fileID: 493985375628066752}
   - component: {fileID: 493985375628066757}
   - component: {fileID: 424175169262332698}
+  - component: {fileID: 493985375628066752}
   m_Layer: 0
   m_Name: opossum
   m_TagString: Enemy
@@ -184,21 +184,6 @@ CircleCollider2D:
   m_Offset: {x: -0.15, y: -0.16}
   serializedVersion: 2
   m_Radius: 0.7029017
---- !u!114 &493985375628066752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 493985375628066755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17b019d6c6fd9f841973583c05bf963e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftPoint: {fileID: 493985375478481065}
-  rightPoint: {fileID: 493985374403028001}
-  speed: 5
 --- !u!95 &493985375628066757
 Animator:
   serializedVersion: 3
@@ -314,3 +299,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &493985375628066752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493985375628066755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b019d6c6fd9f841973583c05bf963e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftPoint: {fileID: 493985375478481065}
+  rightPoint: {fileID: 493985374403028001}
+  speed: 5
