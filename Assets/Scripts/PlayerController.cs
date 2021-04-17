@@ -13,18 +13,15 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float jumpForce;
     public LayerMask ground;
-    public AudioSource jumpAudio, hurtAudio,cherryAudio;
+    //public AudioSource jumpAudio, hurtAudio,cherryAudio;
     public int maxJumpCount = 2;
     private int jumpCount;
-    public Transform cellingCheck;
+    public Transform cellingCheck,groundCheck;
     public int cherryCount;
     public Text cherryNumber;
     public AudioSource deadAudio;
     public bool congratulation = false;
     private bool isHurt;
-    //public bool isGround, isJump;
-    //bool jumpPressed;
-
 
 
     void Start()
@@ -43,40 +40,16 @@ public class PlayerController : MonoBehaviour
         SwitchAnim();
 
 
-
-
-        //if (Input.GetButtonDown("Jump") && jumpCount > 0)
-        //{
-        //    jumpPressed = true;
-
-        //}
-
-
-
     }
 
     void Update()
     {
         Jump();
         Crouch();
+
     }
 
-    //void GroundMovement()
-    //{
-    //    float horizontalMove = Input.GetAxisRaw("Horizontal");
-    //    rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
 
-    //    if (horizontalMove !=0)
-    //    {
-    //        transform.localScale = new Vector3(horizontalMove, 1, 1);
-    //    }
-
-    //}
-
-    //void Jump()
-    //{
-
-    //}
 
 
 
@@ -156,7 +129,7 @@ public class PlayerController : MonoBehaviour
         //物品收集
         if (collision.tag == "Collection")
         {
-            cherryAudio.Play();
+            SoundManager.soundManagerInstance.CherryAudio();
             Destroy(collision.gameObject);
             cherryCount++;
             if (cherryCount==21)
@@ -184,7 +157,7 @@ public class PlayerController : MonoBehaviour
             else if (transform.position.x< collision.gameObject.transform.position.x)
             {
                 rb.velocity = new Vector2(-10f, rb.velocity.y);
-                hurtAudio.Play();
+                SoundManager.soundManagerInstance.HurtAudio();
                 isHurt = true;
             }
             //右侧碰撞
@@ -192,7 +165,7 @@ public class PlayerController : MonoBehaviour
             {
                 
                 rb.velocity = new Vector2(10f, rb.velocity.y);
-                hurtAudio.Play();
+                SoundManager.soundManagerInstance.HurtAudio();
                 isHurt = true;
 
             }
@@ -228,17 +201,25 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    
+    
     void Jump()
     {
         //角色跳跃
         if (Input.GetButtonDown("Jump") && jumpCount > 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.fixedDeltaTime);
-            jumpAudio.Play();
+            SoundManager.soundManagerInstance.JumpAudio();
             anim.SetBool("jumping", true);
             jumpCount--;
 
         }
     }
+
+
+    
+
+
+    
 }
 
