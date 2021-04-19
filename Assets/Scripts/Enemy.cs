@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
 
     public void Death()//销毁对象
     {
-        GetComponent<Collider2D>().enabled = false;
+        //GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject);
     }
 
@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     {
         deathAudio.Play();//播放死亡声音
         anim.SetTrigger("death");
+
 
     }
 
