@@ -9,7 +9,7 @@ public class SwitchLevel : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && player.GetComponent<PlayerController>().cherryCount>=20)
+        if (Input.GetKeyDown(KeyCode.E) && player.GetComponent<PlayerController>().congratulation)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         }
