@@ -203,12 +203,13 @@ public class PlayerController : MonoBehaviour
 
 
     public void Death()
-    {     
+    {
         coll.enabled = false;
         disColl.enabled = false;
         anim.SetTrigger("death");
-        Debug.Log(deadAudio);
         deadAudio.Play();
+        coll.enabled = false;
+        disColl.enabled = false;
         GetComponent<AudioSource>().enabled = false;
         Invoke("Restart", 2f);//重置游戏
     }
