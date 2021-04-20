@@ -49,6 +49,7 @@ MonoBehaviour:
   jumpAudio: {fileID: 8300000, guid: 1534fc1c46699bd43ac431c838acf6eb, type: 3}
   hurtAudio: {fileID: 8300000, guid: e13525498aa675945a5d235cea542c1e, type: 3}
   cherryAudio: {fileID: 8300000, guid: b55202a6cff9b174abe235480b441275, type: 3}
+  deathAudio: {fileID: 8300000, guid: 2adb857f469be6542b88433c6cb895b6, type: 3}
 --- !u!82 &2667020713120424793
 AudioSource:
   m_ObjectHideFlags: 0

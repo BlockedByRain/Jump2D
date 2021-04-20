@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     public Transform cellingCheck,groundCheck;
     public int cherryCount;
     public Text cherryNumber;
-    public AudioSource deadAudio;
     public bool congratulation = false;
     private bool isHurt;
 
@@ -106,7 +105,7 @@ public class PlayerController : MonoBehaviour
         //角色死亡
         if (collision.tag=="DeadLine")
         {
-            deadAudio.Play();
+            SoundManager.soundManagerInstance.DeathAudio();
             Death();
         }
 
@@ -210,7 +209,6 @@ public class PlayerController : MonoBehaviour
         anim.SetTrigger("death");     
         coll.enabled = false;
         disColl.enabled = false;
-        GetComponent<AudioSource>().enabled = false;
         Invoke("Restart", 2f);//重置游戏
     }
 
