@@ -6,8 +6,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager soundManagerInstance;
     public AudioSource audioSource;
-    [SerializeField]
-    private AudioClip jumpAudio, hurtAudio, cherryAudio;
+    public AudioClip jumpAudio, hurtAudio, cherryAudio;
 
 
     private void Awake()

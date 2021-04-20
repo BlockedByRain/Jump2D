@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour
         //角色死亡
         if (collision.tag=="DeadLine")
         {
+            deadAudio.Play();
             Death();
         }
 
@@ -206,14 +207,12 @@ public class PlayerController : MonoBehaviour
     {
         coll.enabled = false;
         disColl.enabled = false;
-        anim.SetTrigger("death");
-        deadAudio.Play();
+        anim.SetTrigger("death");     
         coll.enabled = false;
         disColl.enabled = false;
         GetComponent<AudioSource>().enabled = false;
         Invoke("Restart", 2f);//重置游戏
     }
-
 
     
 }

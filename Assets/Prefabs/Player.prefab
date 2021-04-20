@@ -74,8 +74,8 @@ GameObject:
   - component: {fileID: 7136600329802993988}
   - component: {fileID: 7136600329802994008}
   - component: {fileID: 7136600329802994009}
+  - component: {fileID: 1082671489619447399}
   - component: {fileID: 7136600329802993990}
-  - component: {fileID: 5039571314143160323}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -230,33 +230,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7136600329802993990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7136600329802993987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ced92869160871c4d98ffdb9dd2a9c2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coll: {fileID: 7136600329802994008}
-  disColl: {fileID: 7136600329802993988}
-  speed: 450
-  jumpForce: 520
-  ground:
-    serializedVersion: 2
-    m_Bits: 256
-  maxJumpCount: 2
-  cellingCheck: {fileID: 7998183309197806162}
-  groundCheck: {fileID: 7055618151271144027}
-  cherryCount: 0
-  cherryNumber: {fileID: 0}
-  deadAudio: {fileID: 5039571314143160323}
-  congratulation: 0
---- !u!82 &5039571314143160323
+--- !u!82 &1082671489619447399
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -266,7 +240,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 639c0f1ec1d400f43ae6a0a300007873, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2adb857f469be6542b88433c6cb895b6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -352,3 +326,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7136600329802993990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7136600329802993987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced92869160871c4d98ffdb9dd2a9c2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coll: {fileID: 7136600329802994008}
+  disColl: {fileID: 7136600329802993988}
+  speed: 450
+  jumpForce: 520
+  ground:
+    serializedVersion: 2
+    m_Bits: 256
+  maxJumpCount: 2
+  cellingCheck: {fileID: 7998183309197806162}
+  groundCheck: {fileID: 7055618151271144027}
+  cherryCount: 0
+  cherryNumber: {fileID: 0}
+  deadAudio: {fileID: 1082671489619447399}
+  congratulation: 0
