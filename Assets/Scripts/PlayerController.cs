@@ -117,6 +117,7 @@ public class PlayerController : MonoBehaviour
             SoundManager.soundManagerInstance.CherryAudio();
             Destroy(collision.gameObject);
             cherryCount++;
+            //通关要求
             if (cherryCount>=10)
             {
                 congratulation = true;
