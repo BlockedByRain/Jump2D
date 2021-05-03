@@ -9,8 +9,6 @@ public class Enemy_eagle : Enemy
     public Transform top, bottom;
     public float speed;
     private float topY, bottomY;
-
-
     private bool isUp;
 
 

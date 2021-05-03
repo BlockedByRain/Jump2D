@@ -13,13 +13,11 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float jumpForce;
     public LayerMask ground;
-    //public AudioSource jumpAudio, hurtAudio,cherryAudio;
     public int maxJumpCount = 2;
     private int jumpCount;
     public Transform cellingCheck,groundCheck;
     public int cherryCount;
     public Text cherryNumber;
-    public AudioSource deadAudio;
     public bool congratulation = false;
     private bool isHurt;
 
@@ -32,26 +30,19 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-
         if (!isHurt)
         {
             Movement();
         }
         SwitchAnim();
 
-
     }
-
     void Update()
     {
         Jump();
         Crouch();
 
     }
-
-
-
-
 
 
     void Movement()//角色移动
@@ -111,17 +102,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)//碰撞触发器
     {
-        //游戏重置
+        //角色死亡
         if (collision.tag=="DeadLine")
         {
-            coll.enabled = false;
-            disColl.enabled = false;
-            anim.SetTrigger("death");
-            deadAudio.Play();
-            coll.enabled = false;
-            disColl.enabled = false;
-            GetComponent<AudioSource>().enabled = false;
-            Invoke("Restart", 2f);
+            SoundManager.soundManagerInstance.DeathAudio();
+            Death();
         }
 
 
@@ -132,7 +117,8 @@ public class PlayerController : MonoBehaviour
             SoundManager.soundManagerInstance.CherryAudio();
             Destroy(collision.gameObject);
             cherryCount++;
-            if (cherryCount==21)
+            //通关要求
+            if (cherryCount>=10)
             {
                 congratulation = true;
             }
@@ -217,8 +203,15 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    
-
+    public void Death()
+    {
+        coll.enabled = false;
+        disColl.enabled = false;
+        anim.SetTrigger("death");     
+        coll.enabled = false;
+        disColl.enabled = false;
+        Invoke("Restart", 2f);//重置游戏
+    }
 
     
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
+    //背景相对位移
     public Transform cam;
     public float moveRate;
     private float startPoint;

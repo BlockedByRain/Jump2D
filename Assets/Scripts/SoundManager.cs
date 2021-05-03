@@ -6,8 +6,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager soundManagerInstance;
     public AudioSource audioSource;
-    [SerializeField]
-    private AudioClip jumpAudio, hurtAudio, cherryAudio;
+    public AudioClip jumpAudio, hurtAudio, cherryAudio,deathAudio;
 
 
     private void Awake()
@@ -31,6 +30,13 @@ public class SoundManager : MonoBehaviour
     public void CherryAudio()
     {
         audioSource.clip = cherryAudio;
+        audioSource.Play();
+
+    }
+
+    public void DeathAudio()
+    {
+        audioSource.clip = deathAudio;
         audioSource.Play();
 
     }
