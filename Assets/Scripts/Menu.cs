@@ -33,9 +33,15 @@ public class Menu : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void SetVolume(float value)
+    public void SetVolume(float value)//设置音量
     {
         audioMixer.SetFloat("MainVolume",value);
+
+    }
+
+    public void Return()
+    {
+        SceneManager.LoadScene(0);
 
     }
 
