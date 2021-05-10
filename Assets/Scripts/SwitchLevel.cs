@@ -9,9 +9,14 @@ public class SwitchLevel : MonoBehaviour
     //关卡切换
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && player.GetComponent<PlayerController>().congratulation && SceneManager.GetActiveScene().buildIndex<4)
+        /*
+        Debug.Log(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log(player.GetComponent<PlayerController>().congratulation);
+        */
+        if (Input.GetKeyDown(KeyCode.E) && player.GetComponent<PlayerController>().congratulation && SceneManager.GetActiveScene().buildIndex<5)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         }
+
     }
 }
